@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eu te amo, Maria Cecília.</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            text-align: center;
+            background-color: #121212;
+            color: #ff79c6;
+            padding: 50px;
+            background: linear-gradient(55deg, #290029, #880088);
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        button {
+            font-family: "Trebuchet MS", sans-serif;
+            background-color: #ff79c6;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 1000px;
+        }
+        button:hover {
+            transform: scale(1.1);
+            transition: transform 0.2s;
+        }
+        #mensagem {
+            display: none;
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .galeria {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .linha {
+            display: flex;
+            justify-content: center;
+        }
+        .linha img {
+            width: 150px; /* Define uma largura fixa */
+            height: auto; /* Mantém a proporção original */
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .linha img:hover {
+            transform: scale(1.2);
+        }
+        .imagem-centralizada {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .imagem-centralizada img {
+            width: 150px; /* Mesmo tamanho das outras imagens */
+            height: auto; /* Mantém a proporção original */
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .imagem-centralizada img:hover {
+            transform: scale(1.2);
+        }
+        #imagemAmpliada {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #imagemAmpliada img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+        #imagemAmpliada span {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        #contador {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Música de Fundo -->
+    <audio id="musica" autoplay loop>
+        <source src="sua-musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <h1>Eu te amo, Meu Bem.</h1>
+    <p>O <b>amor</b> é como um pedacinho de céu, sou todo <b>love love</b>, são lábios de mel.</p>
+    
+    <button onclick="mostrarMensagem()">Aperte-me</button>
+
+    <p id="mensagem"> TEXTINHO FOR HER</p>
+
+    <h2>Tempo desde nossa primeira mensagem ⏳</h2>
+    <p id="contador"></p><br><br>
+
+    <!-- Galeria de Fotos -->
+    <h2>Nossos Momentos ✨</h2>
+    <div class="galeria">
+        <div class="linha">
+            <img src="https://euteamomeuamor.github.io/foto1.jpg" onclick="ampliarImagem(this.src)" width="30%">
+            <img src="https://euteamomeuamor.github.io/foto2.jpg" onclick="ampliarImagem(this.src)" width="30%">
+            <img src="https://euteamomeuamor.github.io/foto3.jpg" onclick="ampliarImagem(this.src)" width="30%">
+        </div>
+        <div class="linha">
+            <img src="https://euteamomeuamor.github.io/foto4.jpg" onclick="ampliarImagem(this.src)" width="30%">
+            <img src="https://euteamomeuamor.github.io/foto5.jpg" onclick="ampliarImagem(this.src)" width="30%">
+            <img src="https://euteamomeuamor.github.io/foto6.jpg" onclick="ampliarImagem(this.src)" width="30%">
+        </div>
+        <div class="imagem-centralizada">
+            <img src="https://euteamomeuamor.github.io/foto7.jpg" onclick="ampliarImagem(this.src)">
+        </div>
+    </div>
+
+    <div id="imagemAmpliada" onclick="fecharImagem()">
+        <span>&times;</span>
+        <img id="imagemGrande">
+    </div>
+
+    <script>
+        function ampliarImagem(src) {
+            let modal = document.getElementById("imagemAmpliada");
+            let imagemGrande = document.getElementById("imagemGrande");
+            imagemGrande.src = src;
+            modal.style.display = "flex";
+        }
+        function fecharImagem() {
+            document.getElementById("imagemAmpliada").style.display = "none";
+        }
+        function atualizarContador() {
+        const dataInicial = new Date("2024-10-21T16:35:00"); // Ajuste para a data correta
+        const agora = new Date();
+        const diferenca = agora - dataInicial;
+
+        const segundos = Math.floor(diferenca / 1000);
+        const minutos = Math.floor(segundos / 60);
+        const horas = Math.floor(minutos / 60);
+        const dias = Math.floor(horas / 24);
+        const semanas = Math.floor(dias / 7);
+        const meses = Math.floor(dias / 30.4375);
+        const anos = Math.floor(meses / 12);
+
+        const diasRestantes = dias - (semanas * 7); // Garante que os dias sejam contados corretamente
+
+        document.getElementById("contador").innerText = 
+            `${anos} anos, ${meses % 12} meses, ${semanas} semanas, ${diasRestantes} dias, ${horas % 24} horas, ${minutos % 60} minutos e ${segundos % 60} segundos`;
+        }
+
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+    </script>
+
+</body>
+</html>

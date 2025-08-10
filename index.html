@@ -28,55 +28,17 @@
             font-size: 1.2em;
             cursor: pointer;
             border-radius: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin: 10px;
         }
         button:hover {
             transform: scale(1.1);
             transition: transform 0.2s;
         }
         #mensagem {
-            text-align: center;
+            text-align: justify;
             display: none;
             margin-top: 20px;
             font-size: 1.5em;
-        }
-        .galeria {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 30px;
-        }
-        .linha {
-            display: flex;
-            justify-content: center;
-        }
-        .linha img {
-            width: 150px; /* Define uma largura fixa */
-            height: auto; /* Mantém a proporção original */
-            margin: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .linha img:hover {
-            transform: scale(1.2);
-        }
-        .imagem-centralizada {
-            display: flex;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .imagem-centralizada img {
-            width: 150px; /* Mesmo tamanho das outras imagens */
-            height: auto; /* Mantém a proporção original */
-            margin: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .imagem-centralizada img:hover {
-            transform: scale(1.2);
         }
         #imagemAmpliada {
             display: none;
@@ -103,91 +65,219 @@
             color: white;
             cursor: pointer;
         }
-        #contador {
+        #contador, #contador2 {
             font-size: 1.5em;
             margin-top: 20px;
         }
+        /* Galeria estilo feed */
+        .feed-container {
+            position: relative;
+            width: 500px;
+            margin: auto;
+        }
+        .feed {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+        }
+        .feed img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .feed img:hover {
+            transform: scale(1.05);
+        }
+        .feed-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.4);
+            border: none;
+            font-size: 2em;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .feed-nav.left { left: -50px; }
+        .feed-nav.right { right: -50px; }
     </style>
 </head>
 <body>
 
-    <h1>Eu te amo, Meu Bem.</h1>
-    <p>O <b>amor</b> é como um pedacinho de céu, sou todo <b>love love</b>, são lábios de mel.</p>
-    
-    <button onclick="mostrarMensagem()">Aperte-me</button>
+    <!-- Botões para alternar páginas -->
+    <button onclick="mostrarPagina('pagina1')">1ª Mensagem</button>
+    <button onclick="mostrarPagina('pagina2')">Pedido de Namoro</button>
 
-    <p id="mensagem"> Meu amor,
-        Desde que você entrou na minha vida, tudo ganhou mais cor, mais sentido e mais luz. Você trouxe calma para os meus dias agitados, risos para os meus momentos mais difíceis e um amor tão sincero que acalma minha alma. É incrível como seu olhar me acalma, como seu abraço é meu refúgio e como cada palavra sua tem o poder de transformar meu dia.
-        Você é o meu porto seguro, minha melhor amiga, minha paixão e minha maior sorte. Cada detalhe seu me encanta, cada gesto me conquista mais, e cada momento ao seu lado me faz ter certeza de que estar contigo é o melhor lugar do mundo. Seu sorriso é o brilho que ilumina até os dias mais nublados, e seu amor é o que dá sentido a tudo.
-        Eu prometo estar ao seu lado, segurando sua mão nos dias bons e nos difíceis. Prometo te fazer sorrir, te apoiar em cada sonho e construir contigo uma história linda, cheia de amor, cumplicidade e momentos inesquecíveis.
-        <br>Te amo com toda minha alma, Maria Cecília.<br>Eu te amo hoje, amanhã e sempre...</p>
+    <!-- Página 1 -->
+    <div id="pagina1">
+        <h1>Eu te amo, Meu Bem.</h1>
+        <p>O <b>amor</b> é como um pedacinho de céu, sou todo <b>love love</b>, são lábios de mel.</p>
+        
+        <button onclick="mostrarMensagem()">Aperte-me</button>
 
-    <h2>Tempo desde nossa primeira mensagem ⏳</h2>
-    <p id="contador"></p><br><br>
+        <p id="mensagem">Meu amor, desde que você entrou na minha vida, tudo ganhou mais cor, mais sentido e mais luz. Você trouxe calma para os meus dias agitados, risos para os meus momentos mais difíceis e um amor tão sincero que acalma minha alma. É incrível como seu olhar me acalma, como seu abraço é meu refúgio e como cada palavra sua tem o poder de transformar meu dia.
+            <br>Você é o meu porto seguro, minha melhor amiga, minha paixão e minha maior sorte. Cada detalhe seu me encanta, cada gesto me conquista mais, e cada momento ao seu lado me faz ter certeza de que estar contigo é o melhor lugar do mundo. Seu sorriso é o brilho que ilumina até os dias mais nublados, e seu amor é o que dá sentido a tudo.
+            Eu prometo estar ao seu lado, segurando sua mão nos dias bons e nos difíceis. <br>Prometo te fazer sorrir, te apoiar em cada sonho e construir contigo uma história linda, cheia de amor, cumplicidade e momentos inesquecíveis.
+            <br>Te amo com toda minha alma, Maria Cecília.<br>Eu te amo hoje, amanhã e sempre...</p>
 
-    <!-- Galeria de Fotos -->
-    <h2>Nossos Momentos ✨</h2>
-    <div class="galeria">
-        <div class="linha">
-            <img src="https://euteamomeuamor.github.io/foto1.jpg" onclick="ampliarImagem(this.src)" width="30%">
-            <img src="https://euteamomeuamor.github.io/foto2.jpg" onclick="ampliarImagem(this.src)" width="30%">
-            <img src="https://euteamomeuamor.github.io/foto3.jpg" onclick="ampliarImagem(this.src)" width="30%">
+        <h2>Tempo desde nossa primeira mensagem ⏳</h2>
+        <p id="contador"></p><br><br>
+
+        <h2>Nossos momentos ✨</h2>
+        <div class="feed-container">
+            <button class="feed-nav left" onclick="trocarGrupo('galeria1', -1)">❮</button>
+            <div class="feed" id="galeria1"></div>
+            <button class="feed-nav right" onclick="trocarGrupo('galeria1', 1)">❯</button>
         </div>
-        <div class="linha">
-            <img src="https://euteamomeuamor.github.io/foto4.jpg" onclick="ampliarImagem(this.src)" width="30%">
-            <img src="https://euteamomeuamor.github.io/foto5.jpg" onclick="ampliarImagem(this.src)" width="30%">
-            <img src="https://euteamomeuamor.github.io/foto6.jpg" onclick="ampliarImagem(this.src)" width="30%">
-        </div>
-        <div class="imagem-centralizada">
-            <img src="https://euteamomeuamor.github.io/foto7.jpg" onclick="ampliarImagem(this.src)">
+
+        <div id="imagemAmpliada" onclick="fecharImagem()">
+            <span>&times;</span>
+            <img id="imagemGrande">
         </div>
     </div>
 
-    <div id="imagemAmpliada" onclick="fecharImagem()">
-        <span>&times;</span>
-        <img id="imagemGrande">
+    <!-- Página 2 -->
+    <div id="pagina2" style="display:none;">
+        <h2>Tempo desde o pedido de namoro ⏳</h2>
+        <p id="contador2"></p>
+
+        <h2>Momentos desde lá 📸</h2>
+        <div class="feed-container">
+            <button class="feed-nav left" onclick="trocarGrupo('galeria2', -1)">❮</button>
+            <div class="feed" id="galeria2"></div>
+            <button class="feed-nav right" onclick="trocarGrupo('galeria2', 1)">❯</button>
+        </div>
     </div>
 
     <script>
+        // Alternar páginas
+        function mostrarPagina(id) {
+            document.getElementById("pagina1").style.display = "none";
+            document.getElementById("pagina2").style.display = "none";
+            document.getElementById(id).style.display = "block";
+        }
+
+        // Mensagem romântica
+        function mostrarMensagem() {
+            let mensagem = document.getElementById("mensagem");
+            mensagem.style.display = (mensagem.style.display === "none" || mensagem.style.display === "") ? "block" : "none";
+        }
+
+        // Ampliar imagem
         function ampliarImagem(src) {
-            let modal = document.getElementById("imagemAmpliada");
-            let imagemGrande = document.getElementById("imagemGrande");
-            imagemGrande.src = src;
-            modal.style.display = "flex";
+            document.getElementById("imagemGrande").src = src;
+            document.getElementById("imagemAmpliada").style.display = "flex";
         }
         function fecharImagem() {
             document.getElementById("imagemAmpliada").style.display = "none";
         }
+
+        // Contador página 1
         function atualizarContador() {
-        const dataInicial = new Date("2024-10-21T16:35:00"); // Ajuste para a data correta
-        const agora = new Date();
-        const diferenca = agora - dataInicial;
+            const dataInicial = new Date("2024-10-21T16:35:00");
+            const agora = new Date();
+            const dif = agora - dataInicial;
 
-        const segundos = Math.floor(diferenca / 1000);
-        const minutos = Math.floor(segundos / 60);
-        const horas = Math.floor(minutos / 60);
-        const dias = Math.floor(horas / 24);
-        const semanas = Math.floor(dias / 7);
-        const meses = Math.floor(dias / 30.4375);
-        const anos = Math.floor(meses / 12);
+            const segundos = Math.floor(dif / 1000);
+            const minutos = Math.floor(segundos / 60);
+            const horas = Math.floor(minutos / 60);
+            const dias = Math.floor(horas / 24);
+            const semanas = Math.floor(dias / 7);
+            const meses = Math.floor(dias / 30.4375);
+            const anos = Math.floor(meses / 12);
 
-        const diasRestantes = dias - (semanas * 7); // Garante que os dias sejam contados corretamente
-
-        document.getElementById("contador").innerText = 
-            `${anos} anos, ${meses % 12} meses, ${semanas} semanas, ${diasRestantes} dias, ${horas % 24} horas, ${minutos % 60} minutos e ${segundos % 60} segundos`;
+            const diasRest = dias - (semanas * 7);
+            document.getElementById("contador").innerText = 
+                `${anos} anos, ${meses % 12} meses, ${semanas} semanas, ${diasRest} dias, ${horas % 24}h, ${minutos % 60}m e ${segundos % 60}s`;
         }
-
         setInterval(atualizarContador, 1000);
         atualizarContador();
-        
-        function mostrarMensagem() {
-        let mensagem = document.getElementById("mensagem");
-        if (mensagem.style.display === "none" || mensagem.style.display === "") {
-            mensagem.style.display = "block";
-        } else {
-            mensagem.style.display = "none";
+
+        // Contador página 2
+        function atualizarContador2() {
+            const dataInicial2 = new Date("2025-07-24T16:59:00");
+            const agora2 = new Date();
+            const dif2 = agora2 - dataInicial2;
+
+            const segundos2 = Math.floor(dif2 / 1000);
+            const minutos2 = Math.floor(segundos2 / 60);
+            const horas2 = Math.floor(minutos2 / 60);
+            const dias2 = Math.floor(horas2 / 24);
+            const semanas2 = Math.floor(dias2 / 7);
+            const meses2 = Math.floor(dias2 / 30.4375);
+            const anos2 = Math.floor(meses2 / 12);
+
+            const diasRest2 = dias2 - (semanas2 * 7);
+            document.getElementById("contador2").innerText = 
+                `${anos2} anos, ${meses2 % 12} meses, ${semanas2} semanas, ${diasRest2} dias, ${horas2 % 24}h, ${minutos2 % 60}m e ${segundos2 % 60}s`;
         }
-    }
+        setInterval(atualizarContador2, 1000);
+        atualizarContador2();
+
+        // Listas de fotos
+        let fotos1 = [
+            "https://euteamomeuamor.github.io/foto1.jpg",
+            "https://euteamomeuamor.github.io/foto2.jpg",
+            "https://euteamomeuamor.github.io/foto3.jpg",
+            "https://euteamomeuamor.github.io/foto4.jpg",
+            "https://euteamomeuamor.github.io/foto5.jpg",
+            "https://euteamomeuamor.github.io/foto6.jpg",
+            "https://euteamomeuamor.github.io/foto7.jpg",
+            "https://euteamomeuamor.github.io/foto8.jpg",
+            "https://euteamomeuamor.github.io/foto9.jpg",
+            "https://euteamomeuamor.github.io/foto10.jpg",
+            "https://euteamomeuamor.github.io/foto11.jpg",
+            "https://euteamomeuamor.github.io/foto12.jpg",
+            "https://euteamomeuamor.github.io/foto13.jpg",
+            "https://euteamomeuamor.github.io/foto14.jpg",
+            "https://euteamomeuamor.github.io/foto15.jpg",
+            "https://euteamomeuamor.github.io/foto16.jpg",
+            "https://euteamomeuamor.github.io/foto17.jpg",
+            "https://euteamomeuamor.github.io/foto18.jpg",
+            "https://euteamomeuamor.github.io/foto19.jpg",
+            "https://euteamomeuamor.github.io/foto20.jpg",
+            "https://euteamomeuamor.github.io/foto21.jpg"
+        ];
+        let fotos2 = [
+            "https://euteamomeuamor.github.io/foot1.jpg",
+            "https://euteamomeuamor.github.io/foot2.jpg",
+            "https://euteamomeuamor.github.io/foot3.jpg",
+            "https://euteamomeuamor.github.io/foot4.jpg",
+            "https://euteamomeuamor.github.io/foot5.jpg",
+            "https://euteamomeuamor.github.io/foot6.jpg"
+        ];
+
+        // Controle de grupo
+        let indiceGrupo = { galeria1: 0, galeria2: 0 };
+
+        function mostrarGrupo(id, fotos) {
+            let galeria = document.getElementById(id);
+            galeria.innerHTML = "";
+            let start = indiceGrupo[id] * 3;
+            for (let i = start; i < start + 3 && i < fotos.length; i++) {
+                let img = document.createElement("img");
+                img.src = fotos[i];
+                img.onclick = () => ampliarImagem(fotos[i]);
+                galeria.appendChild(img);
+            }
+        }
+
+        function trocarGrupo(id, dir) {
+            let fotos = (id === "galeria1") ? fotos1 : fotos2;
+            let maxGrupo = Math.ceil(fotos.length / 3) - 1;
+            indiceGrupo[id] += dir;
+            if (indiceGrupo[id] < 0) indiceGrupo[id] = maxGrupo;
+            if (indiceGrupo[id] > maxGrupo) indiceGrupo[id] = 0;
+            mostrarGrupo(id, fotos);
+        }
+
+        mostrarGrupo("galeria1", fotos1);
+        mostrarGrupo("galeria2", fotos2);
     </script>
 
 </body>

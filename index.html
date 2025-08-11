@@ -69,6 +69,16 @@
             font-size: 1.5em;
             margin-top: 20px;
         }
+        #ceuEstrelado {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Para não bloquear cliques */
+            z-index: -1;
+        }
         /* Galeria estilo feed */
         .feed-container {
             position: relative;
@@ -105,9 +115,31 @@
         }
         .feed-nav.left { left: -50px; }
         .feed-nav.right { right: -50px; }
+        
+        body.comemoracao {
+            background: linear-gradient(55deg, #ff8da1, #ff3f6c);
+            color: #fff0f6;
+        }
+
+        @keyframes brilho-pulsante {
+            0%, 100% {
+                box-shadow: 0 0 8px 2px #ff79c6;
+            }
+            50% {
+                box-shadow: 0 0 20px 6px #ff79c6;
+            }
+        }
+
+        button.brilho {
+            animation: brilho-pulsante 2s infinite;
+        }
+        body {
+        cursor: url('data:image/svg+xml;utf8,<svg fill="pink" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 29.6"><path d="M23.6 0c-3.4 0-6.1 2.6-7.6 4.9C14.5 2.6 11.8 0 8.4 0 3.8 0 0 3.8 0 8.4 0 16 16 29.6 16 29.6S32 16 32 8.4C32 3.8 28.2 0 23.6 0z"/></svg>') 16 16, auto;
+        }
     </style>
 </head>
 <body>
+    <canvas id="ceuEstrelado" style="position: fixed; top:0; left:0; width:100%; height:100%; z-index: -1;"></canvas>
 
     <!-- Botões para alternar páginas -->
     <button onclick="mostrarPagina('pagina1')">1ª Mensagem</button>
@@ -278,6 +310,73 @@
 
         mostrarGrupo("galeria1", fotos1);
         mostrarGrupo("galeria2", fotos2);
+
+        // ===== CÉU ESTRELADO =====
+        const canvas = document.getElementById('ceuEstrelado');
+        const ctx = canvas.getContext('2d');
+
+        let stars = [];
+        const numStars = 100;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function criarEstrelas() {
+            stars = [];
+            for(let i=0; i<numStars; i++) {
+                stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 0.8,
+            alpha: Math.random(),
+            delta: 0.01 + Math.random() * 0.02
+        });
+    }
+}
+
+        function animarEstrelas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for(let star of stars){
+                star.alpha += star.delta;
+                if(star.alpha <= 0 || star.alpha >= 1) star.delta = -star.delta;
+
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${star.alpha})`;
+        ctx.fill();
+    }
+    requestAnimationFrame(animarEstrelas);
+}
+
+criarEstrelas();
+animarEstrelas();
+
+        function aplicarTemaComemoracao() {
+            const hoje = new Date();
+            const dia = hoje.getDate();
+            if (dia === 24) {
+            document.body.classList.add('comemoracao');
+  }
+}
+
+aplicarTemaComemoracao();
+
+        function ativarBrilhoBotao() {
+            const hoje = new Date();
+            const dia = hoje.getDate();
+            if (dia === 24) {
+                const botao = document.querySelector('button[onclick="mostrarMensagem()"]');
+                if(botao) {
+                botao.classList.add('brilho');
+    }
+  }
+}
+
+ativarBrilhoBotao();
     </script>
 
 </body>

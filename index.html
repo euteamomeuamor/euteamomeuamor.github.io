@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Eu te amo, Maria Cecília.</title>
     <style>
         body {
@@ -166,11 +166,6 @@
             <div class="feed" id="galeria1"></div>
             <button class="feed-nav right" onclick="trocarGrupo('galeria1', 1)">❯</button>
         </div>
-
-        <div id="imagemAmpliada" onclick="fecharImagem()">
-            <span>&times;</span>
-            <img id="imagemGrande">
-        </div>
     </div>
 
     <!-- Página 2 -->
@@ -184,6 +179,12 @@
             <div class="feed" id="galeria2"></div>
             <button class="feed-nav right" onclick="trocarGrupo('galeria2', 1)">❯</button>
         </div>
+    </div>
+
+    <!-- Modal para imagem ampliada, disponível em todas as páginas -->
+    <div id="imagemAmpliada" onclick="fecharImagem()">
+        <span>&times;</span>
+        <img id="imagemGrande" />
     </div>
 
     <script>
